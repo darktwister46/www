@@ -1,0 +1,24 @@
+Modelo Vista Controlador (MVC) es un estilo de arquitectura de software para desarrollar interfaces de usuario. 
+
+MVC estructura una aplicación en tres componentes principales:
+
+Modelo: Representa los datos de la aplicación y la lógica de negocio. El modelo puede ser un objeto, una clase o un grupo de clases.
+
+Vista: Presenta los datos al usuario. La vista puede ser un archivo HTML, XML u otro formato.
+
+Controlador: Contiene la lógica para manejar las solicitudes del usuario, actualizar el modelo y seleccionar la vista. 
+El controlador puede ser una clase, un objeto o un grupo de clases.
+
+VENTAJAS:
+
+- Permite una mejor separación de responsabilidades.
+- Facilita la reutilización de código.
+- Mejora el rendimiento de la aplicación.
+- Reduce el acoplamiento.
+- Facilita el mantenimiento y la depuración.
+- Facilidad para la realización de pruebas unitarias de los componentes, así como de aplicar desarrollo guiado por pruebas (Test Driven Development o TDD).
+
+
+
+Esta arquitectura es cada vez más utilizada por los programadores. En desarrollo de páginas web también se está convirtiendo en una metodología líder,
+por la flexibilidad que ofrece al desarrollar componentes o módulos para las aplicaciones web.

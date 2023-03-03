@@ -1,0 +1,272 @@
+2022_13_14_185759_create_reservas_table.php(Migracion de Laravel a la BD)
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::defaultStringLength(100);
+        Schema::create('reservas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_cliente')->nullable();
+            $table->unsignedBigInteger('id_invitado')->nullable();
+            $table->unsignedBigInteger('id_menu')->unique();
+            $table->unsignedBigInteger('id_mesa')->unique();
+            $table->string('num_tarjeta');
+            $table->date('fecha_reserva');
+            $table->integer('num_personas');
+            $table->timestamps();
+
+            $table->foreign('id_cliente')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_menu')->references('id')->on('menus')->onDelete('cascade');
+            $table->foreign('id_invitado')->references('id')->on('invitados')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('reservas');
+    }
+};
+
+
+reserva.blade.php
+@extends('layouts.nav')
+@section('viteimports')
+@vite(['resources/scss/_style.scss', 'resources/css/app.css', 'resources/js/app.js'])
+@endsection
+@section('content')
+<div id="booking" class="section">
+	<div class="section-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 col-md-push-5">
+					<div class="booking-cta">
+						<h1>Haz tu reserva</h1>
+						<p>Le recomendamos iniciar sesión en nuestra página web para realizar la reserva con mayores ventajas. Descuentos, promociones y más beneficios creando tu cuenta con nosotros!
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-md-pull-7">
+					<div class="booking-form">
+						<form action="login" method="GET">
+							<div class="form-group">
+								<span class="form-label">Nombre completo</span>
+								<input class="form-control" type="text" value placeholder="Nombre y Apellidos">
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<span class="form-label">Elige la fecha de reserva</span>
+										<input class="form-control" type="date" required>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<span class="form-label">Adultos</span>
+										<select class="form-control">
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+											<option>9</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<span class="form-label">Niños</span>
+										<select class="form-control">
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+											<option>9</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-label">
+								<p class="text-muted">Para una reserva mayor, contacte con nosotros al 987 654 321</p>
+							</div>
+							<div class="form-btn">
+								<button class="submit-btn" href="login">Comprobar disponibilidad</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	@endsection
+
+
+
+
+    misreservas.blade.php
+    @extends('layouts.nav')
+    @section('viteimports')
+    @vite(['resources/scss/_style.scss', 'resources/css/app.css', 'resources/js/app.js'])
+    @endsection
+    @section('content')
+    
+    
+    <table style="border: 1px solid black">
+        <tr>
+            <td>Fecha</td>
+            <td>Mesa</td>
+            <td>Menú</td>
+            <td>Nº de personas</td>
+        </tr>
+    
+        @isset($reservas)
+            @foreach($reservas as $r)
+                <tr>
+                    <td>{{$r->fecha_reserva}}</td>
+                    <td>{{$r->id_mesa}}</td>
+                    <td>{{$r->id_menu}}</td>
+                    <td>{{$r->num_personas}}</td>
+                </tr>
+            @endforeach
+        @endisset
+    </table>
+    
+    @endsection
+
+
+
+    ReservaController.php(CONTROLADOR)
+    <?php
+    
+    namespace App\Http\Controllers;
+    
+    use App\Models\menu;
+    use App\Models\User;
+    use App\Models\reservas;
+    use Illuminate\Http\Request;
+    use Illuminate\Routing\Route;
+    use Illuminate\Routing\Controller;
+    
+    
+    class ReservaController extends Controller
+    {
+        /**
+         * Display a listing of the resource.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function index()
+        {
+            //
+        }
+    
+        /**
+         * Show the form for creating a new resource.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function create()
+        {
+            //
+        }
+    
+        public function showAll()
+        {
+            return view("misreservas")->with("reservas", reservas::where("id_cliente", auth()->user()->id)->get());
+        }
+    
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function store(Request $request)
+        {
+            //
+        }
+    
+        /**
+         * Display the specified resource.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+        public function show($id)
+        {
+            //
+        }
+    
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+        public function edit($id)
+        {
+            //
+        }
+    
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+        public function update(Request $request, $id)
+        {
+            //
+        }
+    
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+        public function destroy($id)
+        {
+            //
+        }
+    }
