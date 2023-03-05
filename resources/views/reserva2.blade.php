@@ -11,11 +11,11 @@
                     @csrf
                     <div class="col-6">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="nombre" name="nombre" class="form-control">
+                        <input type="nombre" name="nombre" class="form-control" value="{{ Auth::user()->name}}">
                     </div>
                     <div class="col-6">
                         <label for="apellidos" class="form-label">Apellidos</label>
-                        <input type="apellidos" name="apellidos" class="form-control">
+                        <input type="apellidos" name="apellidos" class="form-control" value="{{ Auth::user()->apellidos}}">
                     </div>
                     <div class="col-6">
                         <label for="num_personas" class="form-label">*Número de personas</label>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-6">
                         <label for="telefono" class="form-label">Telefono</label>
-                        <input type="number" name="telefono" class="form-control">
+                        <input type="number" name="telefono" class="form-control" value="{{ Auth::user()->telefono}}">
                     </div>
                     <div class="col-12">
                         <label for="menu" class="form-label">Menú entrante: </label>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-12">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control">
+                        <input type="text" name="email" class="form-control" value="{{ Auth::user()->email}}">
                     </div>
                     <div class="col-12">
                     <input type="text" name="fecha" value="{{ $fecha }}" readonly="readonly" class="form-control" style="margin-bottom: 1%">

@@ -15,19 +15,24 @@
             </thead>
             <tbody>
                 @isset($reservas)
-                    @foreach ($reservas as $reserva)
+                    @forelse ($reservas as $reserva)
                         <tr>
                             <td>{{ $reserva->horario->fecha }}</td>
                             <td>{{ $reserva->num_personas }}</td>
                             <td><a href="/rdelete/{{ $reserva->id }}">Eliminar</a></td>
                         </tr>
-                    @endforeach
-                @endisset
-            </tbody>
-        </table>
-    </div>
-    <div class="alert alert-info" style="margin-top: 5%">
-        <h3 style="text-align: center; margin-top: 3%">Recuerda que siempre puedes cancelar tu reserva pulsando el botón de eliminar para cancelar esta reserva.</h2>
-    </div>
+                        @empty
+                            <tr>
+                                <td colspan="3" style="text-align: center">No tienes reservas</td>
+                            </tr>
+                        @endforelse
+                    @endisset
+                </tbody>
+            </table>
+        </div>
+        <div class="alert alert-info" style="margin-top: 5%">
+            <h3 style="text-align: center; margin-top: 3%">Recuerda que siempre puedes cancelar tu reserva pulsando el botón de
+                eliminar para cancelar esta reserva.</h2>
+        </div>
 
-@endsection
+    @endsection
