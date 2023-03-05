@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\menu;
 use App\Models\User;
 use App\Models\reservas;
+use App\Http\Requests\ReservaRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Controller;

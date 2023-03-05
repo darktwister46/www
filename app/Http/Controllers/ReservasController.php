@@ -7,6 +7,7 @@ use App\Models\horario;
 use App\Models\invitado;
 use App\Models\reservas;
 use Illuminate\Http\Request;
+use DispatchesJobs, ValidatesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +21,14 @@ class ReservasController extends Controller
 
         $idh = $horario->id;
         if (!Auth::check()) {
+            $this->validate($request, [
+                'email' => 'required|email',
+                'nombre' => 'required',
+                'apellidos' => 'required',
+                'telefono' => 'required|numeric|min:9|max:9',
+                'num_tarjeta' => 'required|numeric|min:13|max:19',
+
+            ]);
             invitado::create([
                 'email' => $request->post('email'),
                 'nombre' => $request->post('nombre'),
