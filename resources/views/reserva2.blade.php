@@ -27,7 +27,6 @@
                         @else
                             <input type="text" name="apellidos" class="form-control">
                         @endif
-                        <input type="text" name="apellidos" class="form-control" value="{{ Auth::user()->apellidos }}">
                         @error('apellidos')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
