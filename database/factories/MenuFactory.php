@@ -17,7 +17,7 @@ class MenuFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => fake()->name(),
+            'nombre' => "Calamares fritos " . fake()->randomNumber(2),
             'precio' => fake()->randomFloat(2, 80, 200)
         ];
     }

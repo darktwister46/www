@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
+use App\Models\menu;
 use App\Models\horario;
 use App\Models\invitado;
 use App\Models\reservas;
@@ -21,25 +21,16 @@ class ReservasController extends Controller
 
         $idh = $horario->id;
         if (!Auth::check()) {
-            $this->validate($request, [
-                'email' => 'required|email',
-                'nombre' => 'required',
-                'apellidos' => 'required',
-                'telefono' => 'required|numeric|min:9|max:9',
-                'num_tarjeta' => 'required|numeric|min:13|max:19',
-
-            ]);
             invitado::create([
                 'email' => $request->post('email'),
                 'nombre' => $request->post('nombre'),
                 'apellidos' => $request->post('apellidos'),
                 'telefono' => $request->post('telefono')
-
             ]);
 
             reservas::create([
-                'id_cliente' => $request->post('id_cliente'),
-                'id_invitado' => Invitado::where('email', $request->post('email'))->value('id'),
+                'id_cliente' => "1",
+                'id_invitado' => "1",
                 'id_menu' => $request->post('menu'),
                 'id_mesa' => "1",
                 'fecha_reserva' => $idh,
@@ -48,7 +39,7 @@ class ReservasController extends Controller
             ]);
             $horario->estado = "ocupado";
             $horario->save();
-            return redirect("/reserva3");
+            return view("reserva3");
 
         } else {
 
