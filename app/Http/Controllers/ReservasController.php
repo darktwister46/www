@@ -39,7 +39,7 @@ class ReservasController extends Controller
 
             reservas::create([
                 'id_cliente' => $request->post('id_cliente'),
-                'id_invitado' => Invitado::where('email', $request->post('email'))->value('id'),
+                'id_invitado' => invitado::where('email', $request->post('email'))->value('id'),
                 'id_menu' => $request->post('menu'),
                 'id_mesa' => "1",
                 'fecha_reserva' => $idh,
