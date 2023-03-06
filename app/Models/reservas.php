@@ -44,7 +44,7 @@ class Reservas extends Model
         return $this->belongsTo(Menus::class,'id_menu');
     }
     public function horario (){
-        return $this->belongsTo(Horario::class, 'fecha_reserva');
+        return $this->belongsTo(horario::class, 'fecha_reserva');
     }
     public function mesas_cliente(){
         return $this->belongsTo(Mesas::class,'id_mesa');
