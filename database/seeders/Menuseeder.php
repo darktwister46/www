@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Menu;
+use App\Models\menu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +16,6 @@ class Menuseeder extends Seeder
      */
     public function run()
     {
-        Menu::factory(5)->create(); 
+        Menu::factory(5)->create();
     }
 }
