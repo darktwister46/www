@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\menu;
+use App\Models\Menu;
 use App\Models\horario;
 use App\Models\invitado;
 use App\Models\reservas;
@@ -39,7 +39,7 @@ class ReservasController extends Controller
 
             reservas::create([
                 'id_cliente' => $request->post('id_cliente'),
-                'id_invitado' => invitado::where('email', $request->post('email'))->value('id'),
+                'id_invitado' => Invitado::where('email', $request->post('email'))->value('id'),
                 'id_menu' => $request->post('menu'),
                 'id_mesa' => "1",
                 'fecha_reserva' => $idh,
@@ -89,7 +89,7 @@ class ReservasController extends Controller
 
     public function mostrarevento()
     {
-        $fecha = horario::select("fecha", "id")
+        $fecha = Horario::select("fecha", "id")
             ->where("estado", "disponible")
             ->groupBy("fecha", "id")
             ->get();
@@ -110,7 +110,7 @@ class ReservasController extends Controller
 
     public function mostrarhora(Request $request)
     {
-        $horario = horario::where([
+        $horario = Horario::where([
             ["fecha", "=", $request->get("fecha")],
             ["estado", "=", "disponible"]
         ])->get();
@@ -129,9 +129,9 @@ class ReservasController extends Controller
 
     public function enviardatos(Request $request)
     {
-        $hora = $request->post("hora");
-        $fecha = $request->post("fecha");
-        $menus = menu::recogerMenus();
+        $hora = $request->get("hora");
+        $fecha = $request->get("fecha");
+        $menus = Menu::recogerMenus();
 
         return view("reserva2")->with(["hora" => $hora, "fecha" => $fecha,'menus' => $menus,]);
     }
