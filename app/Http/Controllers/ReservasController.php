@@ -129,8 +129,8 @@ class ReservasController extends Controller
 
     public function enviardatos(Request $request)
     {
-        $hora = $request->get("hora");
-        $fecha = $request->get("fecha");
+        $hora = $request->post("hora");
+        $fecha = $request->post("fecha");
         $menus = menu::recogerMenus();
 
         return view("reserva2")->with(["hora" => $hora, "fecha" => $fecha,'menus' => $menus,]);
