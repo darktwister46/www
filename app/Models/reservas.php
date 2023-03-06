@@ -33,7 +33,7 @@ class Reservas extends Model
     {
         $mensaje = reservas::findOrFail($id);
         $mensaje->delete();
-        Horario::where('id', $id)->update(['estado' => "disponible"]);
+        horario::where('id', $id)->update(['estado' => "disponible"]);
     }
 
 
@@ -54,3 +54,4 @@ class Reservas extends Model
     }
 
 }
+?>

@@ -11,14 +11,23 @@
                     @csrf
                     <div class="col-6">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" value="{{ Auth::user()->name}}">
+                        @if (Auth::check())
+                            <input type="text" name="nombre" class="form-control" value="{{ Auth::user()->name }}">
+                        @else
+                            <input type="text" name="nombre" class="form-control">
+                        @endif
                         @error('nombre')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-6">
                         <label for="apellidos" class="form-label">Apellidos</label>
-                        <input type="text" name="apellidos" class="form-control" value="{{ Auth::user()->apellidos}}">
+                        @if (Auth::check())
+                            <input type="text" name="apellidos" class="form-control" value="{{ Auth::user()->apellidos }}">
+                        @else
+                            <input type="text" name="apellidos" class="form-control">
+                        @endif
+                        <input type="text" name="apellidos" class="form-control" value="{{ Auth::user()->apellidos }}">
                         @error('apellidos')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -32,7 +41,11 @@
                     </div>
                     <div class="col-6">
                         <label for="telefono" class="form-label">Telefono</label>
-                        <input type="number" name="telefono" class="form-control" value="{{ Auth::user()->telefono}}">
+                        @if (Auth::check())
+                            <input type="number" name="telefono" class="form-control" value="{{ Auth::user()->telefono }}">
+                        @else
+                            <input type="number" name="telefono" class="form-control">
+                        @endif
                         @error('telefono')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -58,14 +71,20 @@
                     </div>
                     <div class="col-12">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ Auth::user()->email}}">
+                        @if (Auth::check())
+                            <input type="text" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                        @else
+                            <input type="text" name="email" class="form-control">
+                        @endif
                         @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-12">
-                        <input type="text" name="fecha" value="{{ $fecha }}" readonly="readonly" class="form-control" style="margin-bottom: 1%">
-                        <input type="text" name="hora" value="{{ $hora }}" readonly="readonly" class="form-control">
+                        <input type="text" name="fecha" value="{{ $fecha }}" readonly="readonly"
+                            class="form-control" style="margin-bottom: 1%">
+                        <input type="text" name="hora" value="{{ $hora }}" readonly="readonly"
+                            class="form-control">
                     </div>
                     <div>
                         <input type="submit" class="btn btn-primary" value="Aceptar">

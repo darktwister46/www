@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Horario extends Model
+class horario extends Model
 {
     use HasFactory;
 
@@ -24,7 +24,7 @@ class Horario extends Model
     }
 
 public static function recogerFechas(){
-    return Horario::all();
+    return horario::all();
 }
 
 }

@@ -89,7 +89,7 @@ class ReservasController extends Controller
 
     public function mostrarevento()
     {
-        $fecha = Horario::select("fecha", "id")
+        $fecha = horario::select("fecha", "id")
             ->where("estado", "disponible")
             ->groupBy("fecha", "id")
             ->get();
@@ -110,7 +110,7 @@ class ReservasController extends Controller
 
     public function mostrarhora(Request $request)
     {
-        $horario = Horario::where([
+        $horario = horario::where([
             ["fecha", "=", $request->get("fecha")],
             ["estado", "=", "disponible"]
         ])->get();
@@ -131,7 +131,7 @@ class ReservasController extends Controller
     {
         $hora = $request->get("hora");
         $fecha = $request->get("fecha");
-        $menus = Menu::recogerMenus();
+        $menus = menu::recogerMenus();
 
         return view("reserva2")->with(["hora" => $hora, "fecha" => $fecha,'menus' => $menus,]);
     }
