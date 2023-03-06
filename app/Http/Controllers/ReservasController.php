@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
+use App\Models\menu;
 use App\Models\horario;
 use App\Models\invitado;
 use App\Models\reservas;
